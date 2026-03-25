@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes badgeSweep {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateX(420%);
+    opacity: 0;
+  }
+}
+
+.badge-ray {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(103, 232, 249, 0.18) 15%,
+    rgba(103, 232, 249, 0.95) 50%,
+    rgba(103, 232, 249, 0.18) 85%,
+    transparent 100%
+  );
+  filter: blur(10px);
+  animation: badgeSweep 2.3s ease-in-out infinite;
+}
+
+.featured-border-ray {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(103, 232, 249, 0.10) 18%,
+    rgba(103, 232, 249, 0.85) 50%,
+    rgba(103, 232, 249, 0.10) 82%,
+    transparent 100%
+  );
+  filter: blur(10px);
+  animation: featuredBorderSweep 3.4s ease-in-out infinite;
+}
+
+@keyframes featuredBorderSweep {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.18;
+  }
+  60% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(760%);
+    opacity: 0;
+  }
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(42px);
+  transition:
+    opacity 0.85s ease,
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .badge-ray,
+  .featured-border-ray {
+    animation: none;
+  }
+
+  .reveal-up,
+  .reveal-up.revealed {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
