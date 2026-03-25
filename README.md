@@ -1,50 +1,80 @@
-# Arnav Dixit — Portfolio Website
+# Arnav Dixit Portfolio
 
-A modern developer portfolio built to showcase my work as a **SharePoint & SPFx Developer**. This site highlights my Microsoft 365 experience, featured intranet work, selected projects, technical skills, and contact information in a polished, responsive UI.
+A modern portfolio website for **Arnav Dixit**, built to showcase real work across **SharePoint Online**, **SPFx**, **React**, **Power Automate**, **Microsoft Graph**, and broader **Microsoft 365 intranet solutions**.
 
-## Live Preview
+## Live Website
 
-Add your live site URL here after deployment:
+**https://arnav-my-porfolio.uk/**
 
-```txt
-https://your-live-site-url
-```
+## Overview
 
-## About the Project
+This portfolio presents my work as a **SharePoint & SPFx Developer** with a strong focus on:
 
-This portfolio is designed to present my work in:
+- modern SharePoint Online intranets
+- custom SPFx solutions
+- reusable React-based UI components
+- Power Automate workflows
+- Microsoft Graph and REST API integrations
+- responsive, polished Microsoft 365 experiences
+
+The site includes a featured case study for **Tawasol – Revamp Intranet Portal**, a gallery of project screens, selected project work, experience highlights, a resume section, and direct contact options.
+
+## Featured Work
+
+### Tawasol – Revamp Intranet Portal
+**Sep 2025 – Current**
+
+A modern SharePoint Online intranet revamp built to centralize news, events, policies, forms, dashboards, and collaboration tools in one branded digital workplace.
+
+**Stack used:**
+- SharePoint Online
+- SPFx
+- PnP JS
+- PnP PowerShell
+- Microsoft Graph API
+- REST APIs
+- Power BI
+- SCSS
+- Amplitude Analytics
+
+### Additional Highlighted Projects
+
+#### GlobalOne News Hub
+**Sep 2024 – Sep 2025**
+
+A multi-country, multilingual intranet news portal built to centralize corporate news and deliver role- and country-targeted content through one enterprise hub.
+
+#### MetaPort – Internal Travel Desk
+**Jun 2023 – Aug 2024**
+
+An internal travel management solution for travel requests, approvals, itineraries, reminders, and coordinator workflows using SharePoint, Canvas Apps, and Power Automate.
+
+#### Custom SharePoint Solutions at Teceon
+**May 2023 – Sep 2025**
+
+Delivered client-specific SharePoint solutions including custom web parts, forms, permissions, integrations, and workflow-driven business modules.
+
+## Core Skills Highlighted on the Site
 
 - SharePoint Online
-- SPFx development
-- React-based UI implementation
-- Power Automate workflows
-- Microsoft Graph integrations
-- Microsoft 365 intranet solutions
+- SPFx
+- React
+- TypeScript
+- JavaScript
+- Tailwind CSS / SCSS / CSS
+- Power Automate
+- Canvas Apps
+- Dataverse Basics
+- Microsoft Graph
+- REST APIs
+- PnP JS
+- PnP PowerShell
+- Power BI
+- ShareGate
 
-It includes a featured case study section for **Tawasol – Revamp Intranet Portal**, a project gallery, project cards, experience timeline, resume download, and contact section.
+## Site Sections
 
-## Features
-
-- Responsive portfolio layout for desktop and mobile
-- Smooth scroll navigation with mobile sidebar menu
-- Scroll-reveal animations across sections
-- Interactive project gallery with image viewer modal
-- Resume download section
-- Protected phone number reveal behavior
-- Clean component-based structure for easier maintenance
-- Netlify-friendly deployment setup
-
-## Tech Stack
-
-- **React**
-- **Vite**
-- **Tailwind CSS**
-- **Lucide React**
-- **JavaScript / JSX**
-
-## Sections Included
-
-- Hero Section
+- Hero
 - About
 - Skills
 - Featured Work
@@ -53,6 +83,26 @@ It includes a featured case study section for **Tawasol – Revamp Intranet Port
 - Experience
 - Resume
 - Contact
+
+## Key UI / UX Features
+
+- responsive layout for desktop and mobile
+- sticky header with section navigation
+- mobile navigation drawer
+- smooth scroll between sections
+- scroll-reveal animation for content blocks
+- gallery cards with image viewer modal
+- hover-enhanced project and skill cards
+- protected phone reveal interaction
+- downloadable resume section
+
+## Tech Stack
+
+- **React**
+- **Vite**
+- **Tailwind CSS**
+- **Lucide React**
+- **JavaScript / JSX**
 
 ## Project Structure
 
@@ -74,104 +124,64 @@ src/
   index.css
 ```
 
-## Getting Started
+## Running the Project Locally
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
-```
-
-### 2. Install dependencies
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### 3. Start the development server
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-### 4. Build for production
+Create a production build:
 
 ```bash
 npm run build
 ```
 
-### 5. Preview the production build
+Preview the production build locally:
 
 ```bash
 npm run preview
 ```
 
-## Customization
+## Content Management
 
-You can update portfolio content from the data files:
+Most portfolio content is maintained through the data layer:
 
-- `src/data/portfolioData.js` → profile info, skills, projects, experience
-- `src/data/tawasolGallery.js` → gallery images and notes
+- `src/data/portfolioData.js` for profile details, skills, featured work, projects, and experience
+- `src/data/tawasolGallery.js` for gallery items and image mappings
 
-This makes content updates easier without changing the main UI logic.
+This keeps the UI components cleaner and makes future content updates easier.
 
 ## Deployment
 
-This project can be deployed easily on **Netlify**.
+The site is deployed on **Netlify** and currently live at:
 
-### Netlify manual deploy
+**https://arnav-my-porfolio.uk/**
 
-1. Run:
+For new production deployments:
 
 ```bash
 npm run build
 ```
 
-2. Upload the generated `dist` folder to Netlify.
-
-### Netlify Git-based deploy
-
-1. Push the repo to GitHub
-2. Connect the repository to Netlify
-3. Use:
-
-```txt
-Build command: npm run build
-Publish directory: dist
-```
-
-## Featured Work
-
-### Tawasol – Revamp Intranet Portal
-
-A modern SharePoint Online intranet revamp built to centralize news, events, policies, forms, dashboards, and collaboration tools in one branded digital workplace.
-
-### Other Highlighted Projects
-
-- **GlobalOne News Hub**
-- **MetaPort – Internal Travel Desk**
-- **Custom SharePoint Solutions at Teceon**
+Then deploy the generated `dist` folder to Netlify, or push updated code if the repository is connected to Netlify for automatic builds.
 
 ## Contact
 
 **Arnav Dixit**  
-SharePoint & SPFx Developer  
-Gurugram, Haryana  
-Email: `dixitarnav20@gmail.com`
-
-LinkedIn and GitHub links can be added directly from the portfolio data file.
-
-## Roadmap
-
-Potential future improvements:
-
-- Add dark/light theme switch
-- Add blog or case study detail pages
-- Add project filters by technology
-- Add GitHub stats or contribution widgets
-- Add SEO improvements and social preview metadata
+**SharePoint & SPFx Developer**  
+**Location:** Gurugram, Haryana  
+**Email:** dixitarnav20@gmail.com  
+**LinkedIn:** https://www.linkedin.com/in/arnav-dixit-5a5870148/  
+**GitHub:** https://github.com/arnav2404
 
 ## License
 
-This project is open for personal portfolio reference. Please do not copy the full design/content as-is without permission.
+This repository is intended for personal portfolio use and professional showcase purposes. Please do not reuse the full design, content, or branding as-is without permission.
