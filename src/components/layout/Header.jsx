@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, X } from "lucide-react";
 import { scrollToSection, scrollToTop } from "../../utils/scroll";
+import portfolioLogo from "../../assets/Logo/Portfolio_logo.png";
 
 const navItems = [
   { id: "about", label: "About" },
@@ -56,12 +57,20 @@ export default function Header({ profile }) {
           <button
             type="button"
             onClick={handleBrandClick}
-            className="cursor-pointer text-left transition hover:opacity-90"
+            className="flex items-center gap-3 text-left transition hover:opacity-90"
           >
-            <h1 className="text-lg font-bold tracking-wide text-white">{profile.name}</h1>
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">
-              {profile.title}
-            </p>
+            <img
+              src={portfolioLogo}
+              alt={`${profile.name} logo`}
+              className="h-11 w-11 rounded-xl object-contain md:h-12 md:w-22"
+            />
+
+            <div>
+              <h1 className="text-lg font-bold tracking-wide text-white">{profile.name}</h1>
+              <p className="text-xs uppercase tracking-[0.22em] text-slate-400">
+                {profile.title}
+              </p>
+            </div>
           </button>
 
           <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
@@ -109,11 +118,19 @@ export default function Header({ profile }) {
           }`}
         >
           <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-            <div>
-              <h2 className="text-base font-semibold text-white">{profile.name}</h2>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-slate-400">
-                SharePoint and SPFx Developer
-              </p>
+            <div className="flex items-center gap-3">
+              <img
+                src={portfolioLogo}
+                alt={`${profile.name} logo`}
+                className="h-10 w-10 rounded-xl object-contain"
+              />
+
+              <div>
+                <h2 className="text-base font-semibold text-white">{profile.name}</h2>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-slate-400">
+                  {profile.title}
+                </p>
+              </div>
             </div>
 
             <button
