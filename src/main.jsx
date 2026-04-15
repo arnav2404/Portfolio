@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import portfolioLogo from "./assets/logo/favicon_logo.png";
+import portfolioLogo from "./assets/logo/temp.png";
 
 const existingFavicon = document.querySelector("link[rel='icon']");
 const favicon = existingFavicon || document.createElement("link");
