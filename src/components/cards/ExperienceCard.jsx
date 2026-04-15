@@ -13,6 +13,7 @@ export default function ExperienceCard({ item, delay = 0 }) {
           <div>
             <h3 className="text-2xl font-semibold text-white">{item.role}</h3>
             <p className="mt-1 text-cyan-300">{item.company}</p>
+            <p className="mt-1 text-slate-300">{item.location}</p>
           </div>
           <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-300">
             {item.period}

@@ -6,6 +6,7 @@ import Header from "./components/layout/Header";
 import HeroSection from "./components/layout/HeroSection";
 import AboutSection from "./components/sections/AboutSection";
 import SkillsSection from "./components/sections/SkillsSection";
+import ToolsSection from "./components/sections/ToolsSection";
 import FeaturedSection from "./components/sections/FeaturedSection";
 import GallerySection from "./components/sections/GallerySection";
 import ProjectsSection from "./components/sections/ProjectsSection";
@@ -75,6 +76,7 @@ export default function App() {
         <HeroSection profile={profile} />
         <AboutSection />
         <SkillsSection />
+        <ToolsSection />
         <FeaturedSection />
         <GallerySection onOpenViewer={openViewer} />
         <ProjectsSection />

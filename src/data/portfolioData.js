@@ -191,7 +191,8 @@ export const projects = [
 export const experience = [
   {
     role: "SharePoint & SPFx Developer",
-    company: "Essence Software Solutions Pvt Ltd",
+    company: "Essence Software Solutions Private Limited",
+    location: "Gurugram",
     period: "Sep 2025 – Current",
     points: [
       "Designed and developed the Tawasol SharePoint Online intranet using SPFx web parts, extensions, and custom theming.",
@@ -201,7 +202,8 @@ export const experience = [
   },
   {
     role: "SharePoint Developer",
-    company: "Teceon",
+    company: "Teceon Softwares Private Limited",
+    location: "New Delhi",
     period: "May 2023 – Sep 2025",
     points: [
       "Built custom SharePoint solutions, forms, workflows, integrations, and enhancements aligned to client requirements.",
