@@ -1,9 +1,9 @@
-import sharepoint from "../assets/logo/SharePoint_logo.svg";
-import powerAutomate from "../assets/logo/Power_Automate_logo.svg";
-import powerApps from "../assets/logo/Powerapps_logo.svg";
-import azure from "../assets/logo/Azure_logo.svg";
-import copilot from "../assets/logo/Copilot_studio_logo.png";
-import pnp from "../assets/logo/Powershell_logo.svg"
+import sharepoint from "../assets/Logo/SharePoint_logo.svg";
+import powerAutomate from "../assets/Logo/Power_Automate_logo.svg";
+import powerApps from "../assets/Logo/Powerapps_logo.svg";
+import azure from "../assets/Logo/Azure_logo.svg";
+import copilot from "../assets/Logo/Copilot_studio_logo.png";
+import pnp from "../assets/Logo/Powershell_logo.svg"
 
 export const tools = [
   { name: "SharePoint", icon: sharepoint },

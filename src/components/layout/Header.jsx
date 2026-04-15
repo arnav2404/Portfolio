@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, X } from "lucide-react";
 import { scrollToSection, scrollToTop } from "../../utils/scroll";
-import portfolioLogo from "../../assets/logo/Portfolio_logo.png";
+import portfolioLogo from "../../assets/Logo/Portfolio_logo.png";
 
 const navItems = [
   { id: "about", label: "About" },
