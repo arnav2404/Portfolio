@@ -1,20 +1,38 @@
 import React from "react";
 import { Menu, X } from "lucide-react";
-import { scrollToSection, scrollToTop } from "../../utils/scroll";
 import portfolioLogo from "../../assets/Logo/Portfolio_logo.png";
 
 const navItems = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "tawasol", label: "Featured Work" },
-  { id: "gallery", label: "Gallery" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "resume", label: "Resume" },
-  { id: "contact", label: "Contact" },
+  { label: "Home", page: "home" },
+  { id: "about", label: "About", page: "home" },
+  { id: "skills", label: "Skills", page: "home" },
+  { id: "tools", label: "Tools", page: "home" },
+  { label: "Projects", page: "projects" },
+  // { id: "corpdms-case-study", label: "CorpDMS Case Study", page: "projects" },
+  { id: "tawasol", label: "Featured Work", page: "projects" },
+  { id: "gallery", label: "Gallery", page: "projects" },
+  { id: "projects", label: "Project Cards", page: "projects" },
+  { id: "experience", label: "Experience", page: "home" },
+  { id: "resume", label: "Resume", page: "home" },
+  { id: "contact", label: "Contact", page: "home" },
 ];
 
-export default function Header({ profile }) {
+const desktopNavItems = [
+  { label: "Home", page: "home" },
+  { id: "skills", label: "Skills", page: "home" },
+  { label: "Projects", page: "projects" },
+  // { id: "corpdms-case-study", label: "CorpDMS", page: "projects" },
+  { id: "experience", label: "Experience", page: "home" },
+  { id: "contact", label: "Contact", page: "home" },
+];
+
+export default function Header({
+  profile,
+  currentPage = "home",
+  onNavigateHome,
+  onNavigatePage,
+  onNavigateSection,
+}) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -34,20 +52,39 @@ export default function Header({ profile }) {
     };
   }, [isMenuOpen]);
 
-  const handleNavClick = (e, id) => {
-    e.preventDefault();
-    scrollToSection(id);
+  const handleNavClick = (event, item) => {
+    event.preventDefault();
+
+    if (item.id) {
+      onNavigateSection?.(item.id, item.page);
+    } else if (item.page === "home") {
+      onNavigateHome?.();
+    } else {
+      onNavigatePage?.(item.page);
+    }
+
     setIsMenuOpen(false);
   };
 
-  const handleBrandClick = (e) => {
-    e.preventDefault();
-    scrollToTop(true);
+  const handleBrandClick = (event) => {
+    event.preventDefault();
+    onNavigateHome?.();
     setIsMenuOpen(false);
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const getHref = (item) => {
+    if (item.id) return `#${item.id}`;
+    return item.page === "projects" ? "#projects-page" : "#home";
+  };
+
+  const getDesktopLinkClass = (item) => {
+    const isActivePage = !item.id && item.page === currentPage;
+
+    return `transition ${isActivePage ? "text-cyan-300" : "hover:text-white"}`;
   };
 
   return (
@@ -57,7 +94,7 @@ export default function Header({ profile }) {
           <button
             type="button"
             onClick={handleBrandClick}
-            className="flex items-center gap-3 text-left transition hover:opacity-90"
+            className="flex items-center cursor-pointer gap-3 text-left transition hover:opacity-90"
           >
             <img
               src={portfolioLogo}
@@ -74,18 +111,16 @@ export default function Header({ profile }) {
           </button>
 
           <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-            <a href="#about" onClick={(e) => handleNavClick(e, "about")} className="transition hover:text-white">
-              About
-            </a>
-            <a href="#skills" onClick={(e) => handleNavClick(e, "skills")} className="transition hover:text-white">
-              Skills
-            </a>
-            <a href="#projects" onClick={(e) => handleNavClick(e, "projects")} className="transition hover:text-white">
-              Projects
-            </a>
-            <a href="#contact" onClick={(e) => handleNavClick(e, "contact")} className="transition hover:text-white">
-              Contact
-            </a>
+            {desktopNavItems.map((item) => (
+              <a
+                key={`${item.page}-${item.id || item.label}`}
+                href={getHref(item)}
+                onClick={(event) => handleNavClick(event, item)}
+                className={getDesktopLinkClass(item)}
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
 
           <button
@@ -147,13 +182,13 @@ export default function Header({ profile }) {
             <div className="space-y-2">
               {navItems.map((item) => (
                 <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={(e) => handleNavClick(e, item.id)}
+                  key={`${item.page}-${item.id || item.label}`}
+                  href={getHref(item)}
+                  onClick={(event) => handleNavClick(event, item)}
                   className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-medium text-slate-200 transition hover:border-cyan-400/35 hover:bg-cyan-400/[0.08] hover:text-white"
                 >
                   <span>{item.label}</span>
-                  <span className="text-cyan-300">•</span>
+                  <span className={item.page === currentPage ? "text-cyan-300" : "text-slate-500"}>•</span>
                 </a>
               ))}
             </div>
@@ -165,7 +200,7 @@ export default function Header({ profile }) {
               onClick={handleBrandClick}
               className="w-full rounded-2xl bg-cyan-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:scale-[1.01]"
             >
-              Back to Top
+              Back to Home
             </button>
           </div>
         </div>

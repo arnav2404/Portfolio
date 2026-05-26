@@ -4,6 +4,19 @@ import searchSuggestionImg from "../assets/Search_Suggestion.png";
 import headerImg from "../assets/Header.png";
 import notificationCenterImg from "../assets/Notification_Center.png";
 import searchImg from "../assets/PnP_Modern_search.png";
+import corpDmsQuickSearchImg from "../assets/CorpDMS/CorpDMS_Quick_Search.png";
+import corpDmsAdvancedSearchImg from "../assets/CorpDMS/CorpDMS_Advanced_Search.png";
+import corpDmsAdvancedSearch1Img from "../assets/CorpDMS/CorpDMS_Advanced_Search_1.png";
+import corpDmsAdvancedSearch2Img from "../assets/CorpDMS/CorpDMS_Advanced_Search_2.png";
+import corpDmsAdvancedSearchResultImg from "../assets/CorpDMS/CorpDMS_Advanced_Search_Result.png";
+import corpDmsArchiveSearchImg from "../assets/CorpDMS/CorpDMS_Archive_Search.png";
+import corpDmsDocumentDetailsImg from "../assets/CorpDMS/CorpDMS_DocumentDetails.png";
+import corpDmsHistoryModelImg from "../assets/CorpDMS/CorpDMS_History_Model.png";
+import corpDmsLinkModelImg from "../assets/CorpDMS/CorpDMS_Link_Model.png";
+import corpDmsListSearchImg from "../assets/CorpDMS/CorpDMS_List_Search.png";
+import corpDmsListSearch1Img from "../assets/CorpDMS/CorpDMS_List_Search_1.png";
+import corpDmsListSearch2Img from "../assets/CorpDMS/CorpDMS_List_Search_2.png";
+import corpDmsReportSearchImg from "../assets/CorpDMS/CorpDMS_Report_Search.png";
 
 import featuredWheel1Img from "../assets/FeaturedWheel/FeaturedWheel_1.png";
 import featuredWheel2Img from "../assets/FeaturedWheel/FeaturedWheel_2.png";
@@ -76,6 +89,25 @@ import news6Img from "../assets/News/News_6.png";
 import news7Img from "../assets/News/News_7.png";
 
 export const tawasolGallery = [
+  {
+    title: "CorpDMS Search Optimization",
+    note: "A document search stabilization and optimization module covering Quick Search, Advanced Search, search results, archive search, document details, history and linked-document modals, list lookups, report search, pagination, field mapping, comments, KQL fallback logic, managed properties, and table UI improvements.",
+    images: [
+      corpDmsQuickSearchImg,
+      corpDmsAdvancedSearchImg,
+      corpDmsAdvancedSearch1Img,
+      corpDmsAdvancedSearch2Img,
+      corpDmsAdvancedSearchResultImg,
+      corpDmsArchiveSearchImg,
+      corpDmsDocumentDetailsImg,
+      corpDmsHistoryModelImg,
+      corpDmsLinkModelImg,
+      corpDmsListSearchImg,
+      corpDmsListSearch1Img,
+      corpDmsListSearch2Img,
+      corpDmsReportSearchImg,
+    ],
+  },
   {
     title: "Featured Wheel",
     note: "An interactive homepage navigation experience designed to surface featured destinations, quick actions, and high-visibility content in a more visual and engaging format.",

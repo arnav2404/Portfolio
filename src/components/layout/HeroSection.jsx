@@ -4,7 +4,7 @@ import { careerStartDate, featuredProject } from "../../data/portfolioData";
 import { getFriendlyExperience } from "../../utils/experience";
 import { scrollToSection } from "../../utils/scroll";
 
-export default function HeroSection({ profile }) {
+export default function HeroSection({ profile, onViewProjects }) {
   const hasPhone = Boolean(profile.phone?.trim());
   const [isPhoneVisible, setIsPhoneVisible] = React.useState(false);
   const today = new Date();
@@ -19,6 +19,15 @@ export default function HeroSection({ profile }) {
 
   const handleRevealPhone = () => {
     setIsPhoneVisible((prev) => !prev);
+  };
+
+  const handleViewProjects = () => {
+    if (onViewProjects) {
+      onViewProjects();
+      return;
+    }
+
+    scrollToSection("tawasol");
   };
 
   return (
@@ -45,10 +54,10 @@ export default function HeroSection({ profile }) {
         <div className="mt-8 flex flex-wrap gap-4">
           <button
             type="button"
-            onClick={() => scrollToSection("tawasol")}
+            onClick={handleViewProjects}
             className="inline-flex items-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 transition hover:scale-[1.02]"
           >
-            View Featured Work <ArrowRight className="h-4 w-4" />
+            View Projects <ArrowRight className="h-4 w-4" />
           </button>
 
           <a

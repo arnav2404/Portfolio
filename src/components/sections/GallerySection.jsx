@@ -9,7 +9,7 @@ export default function GallerySection({ onOpenViewer }) {
       <SectionHeading
         eyebrow="Gallery"
         title="Project gallery"
-        subtitle="Explore a selection of real Tawasol screens covering homepage experiences, search, notifications, forms, policies, and informational modules."
+        subtitle="Browse real project screens. CorpDMS is placed first so visitors can immediately see the Quick Search, Advanced Search, results grid, archive, document details, history, linked documents, lists, and report areas connected to the case study above."
       />
 
       <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">

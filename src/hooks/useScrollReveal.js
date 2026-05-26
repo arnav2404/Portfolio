@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function useScrollReveal() {
+export default function useScrollReveal(refreshKey = "default") {
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal-up");
 
@@ -19,8 +19,11 @@ export default function useScrollReveal() {
       }
     );
 
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach((el) => {
+      el.classList.remove("revealed");
+      observer.observe(el);
+    });
 
     return () => observer.disconnect();
-  }, []);
+  }, [refreshKey]);
 }

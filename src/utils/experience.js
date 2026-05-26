@@ -24,8 +24,8 @@ export function getFriendlyExperience(startDate, currentDate = new Date()) {
   }
 
   if (months === 0) {
-    return `${years} ${years === 1 ? "yr" : "yrs"}`;
+    return `${years} yrs`;
   }
 
-  return `${years} ${years === 1 ? "yr" : "yrs"} ${months} ${months === 1 ? "mo" : "mos"}`;
+  return `${years}.${months} yrs`;
 }
