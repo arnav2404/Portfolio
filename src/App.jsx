@@ -1,6 +1,7 @@
 import React from "react";
 import { profile } from "./data/portfolioData";
 import { tawasolGallery } from "./data/tawasolGallery";
+import { Analytics } from '@vercel/analytics/next';
 
 import Header from "./components/layout/Header";
 import HeroSection from "./components/layout/HeroSection";
@@ -151,6 +152,7 @@ export default function App() {
         show={showScrollTop}
         onClick={() => scrollToTop(true)}
       />
+      <Analytics />
     </div>
   );
 }
