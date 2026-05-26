@@ -1,7 +1,7 @@
 import React from "react";
 import { profile } from "./data/portfolioData";
 import { tawasolGallery } from "./data/tawasolGallery";
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from "@vercel/analytics/react";
 
 import Header from "./components/layout/Header";
 import HeroSection from "./components/layout/HeroSection";
