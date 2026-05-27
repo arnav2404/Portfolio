@@ -23,13 +23,13 @@ export default function ContactCard({
   const resolvedHref = isPhone && !isPhoneVisible ? "#" : href;
 
   return (
-    <div className="reveal-up h-full" style={{ transitionDelay: `${delay}ms` }}>
+    <div className="reveal-up h-full min-w-0" style={{ transitionDelay: `${delay}ms` }}>
       <a
         href={resolvedHref}
         onClick={handleClick}
         target={external ? "_blank" : undefined}
         rel={external ? "noreferrer" : undefined}
-        className="group relative block h-full overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-cyan-400/35 hover:bg-cyan-400/[0.08] hover:shadow-[0_0_22px_rgba(34,211,238,0.08)]"
+        className="group relative block h-full min-w-0 overflow-hidden rounded-[24px] border border-white/10 bg-white/5 p-5 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-cyan-400/35 hover:bg-cyan-400/[0.08] hover:shadow-[0_0_22px_rgba(34,211,238,0.08)] sm:rounded-[28px] sm:p-6"
       >
         <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
           <div className="absolute -left-10 top-0 h-24 w-24 rounded-full bg-cyan-400/10 blur-2xl" />
@@ -40,8 +40,10 @@ export default function ContactCard({
           {icon}
         </div>
 
-        <h3 className="relative mt-4 text-xl font-semibold text-white">{title}</h3>
-        <div className="relative mt-2 text-sm leading-7 text-slate-300">{displayText}</div>
+        <h3 className="relative mt-4 text-lg font-semibold text-white sm:text-xl">{title}</h3>
+        <div className="xs-break-all relative mt-2 min-w-0 text-sm leading-7 text-slate-300">
+          {displayText}
+        </div>
       </a>
     </div>
   );

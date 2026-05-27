@@ -101,11 +101,12 @@ export default function App() {
   const activeImageSrc = viewer ? activeImages[viewer.imageIndex] : null;
 
   return (
-    <div className="min-h-screen bg-[#07111f] text-slate-100">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-0 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
-        <div className="absolute right-0 top-40 h-80 w-80 rounded-full bg-blue-500/20 blur-3xl" />
-        <div className="absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl" />
+    <div className="relative isolate min-h-screen overflow-x-hidden bg-[#07111f] text-slate-100">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl sm:left-0 sm:top-0" />
+        <div className="absolute -right-32 top-64 h-80 w-80 rounded-full bg-blue-500/20 blur-3xl sm:right-0 sm:top-40" />
+        <div className="absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-indigo-500/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(15,23,42,0)_0,rgba(7,17,31,0.72)_46%,#07111f_100%)]" />
       </div>
 
       <Header
@@ -116,7 +117,7 @@ export default function App() {
         onNavigateSection={navigateToSection}
       />
 
-      <main>
+      <main className="min-w-0 pt-16 sm:pt-[72px]">
         {currentPage === "home" ? (
           <>
             <HeroSection

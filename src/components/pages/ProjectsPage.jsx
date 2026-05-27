@@ -8,13 +8,13 @@ import SectionHeading from "../common/SectionHeading";
 
 export default function ProjectsPage({ onOpenViewer, onNavigateHome }) {
   return (
-    <div id="projects-page">
-      <section className="mx-auto max-w-7xl px-6 pb-4 pt-16 lg:px-8 lg:pt-20">
+    <div id="projects-page" className="min-w-0">
+      <section className="mx-auto max-w-7xl px-4 pb-4 pt-10 sm:px-6 sm:pt-14 lg:px-8 lg:pt-20">
         <div className="reveal-up">
           <button
             type="button"
             onClick={onNavigateHome}
-            className="mb-8 inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-400/35 hover:bg-cyan-400/[0.08] hover:text-white"
+            className="mb-7 inline-flex min-h-11 items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-400/35 hover:bg-cyan-400/[0.08] hover:text-white sm:mb-8"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home

@@ -5,14 +5,14 @@ import SectionHeading from "../common/SectionHeading";
 
 export default function GallerySection({ onOpenViewer }) {
   return (
-    <section id="gallery" className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+    <section id="gallery" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <SectionHeading
         eyebrow="Gallery"
         title="Project gallery"
         subtitle="Browse real project screens. CorpDMS is placed first so visitors can immediately see the Quick Search, Advanced Search, results grid, archive, document details, history, linked documents, lists, and report areas connected to the case study above."
       />
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-8 grid gap-5 sm:mt-10 sm:grid-cols-2 xl:grid-cols-3">
         {tawasolGallery.map((item, index) => (
           <GalleryCard
             key={item.title}

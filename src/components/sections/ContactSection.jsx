@@ -9,20 +9,20 @@ export default function ContactSection({ profile }) {
 
   const gridClass =
     hasPhone && hasGithub
-      ? "md:grid-cols-4"
+      ? "sm:grid-cols-2 xl:grid-cols-4"
       : hasPhone || hasGithub
-      ? "md:grid-cols-3"
-      : "md:grid-cols-2";
+        ? "sm:grid-cols-2 lg:grid-cols-3"
+        : "sm:grid-cols-2";
 
   return (
-    <section id="contact" className="mx-auto max-w-7xl px-6 pb-20 pt-16 lg:px-8">
+    <section id="contact" className="mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:px-8">
       <SectionHeading
         eyebrow="Contact"
         title="Let’s connect"
         subtitle="I’m open to SharePoint, SPFx, Microsoft 365, and intranet-focused opportunities, collaborations, and conversations."
       />
 
-      <div className={`mt-10 grid gap-6 ${gridClass}`}>
+      <div className={`mt-8 grid gap-5 sm:mt-10 ${gridClass}`}>
         <ContactCard
           href={`mailto:${profile.email}`}
           title="Email"
