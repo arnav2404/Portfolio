@@ -1,20 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "@fontsource-variable/inter/wght.css";
+import "@fontsource-variable/bricolage-grotesque/wght.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
 import "./index.css";
 import App from "./App";
-
-const existingFavicon = document.querySelector("link[rel='icon']");
-const favicon = existingFavicon || document.createElement("link");
-
-favicon.setAttribute("rel", "icon");
-favicon.setAttribute("type", "image/png");
-favicon.setAttribute("href", "/favicon.png");
-
-if (!existingFavicon) {
-  document.head.appendChild(favicon);
-}
-
-document.title = "Arnav Dixit | SharePoint & SPFx Developer";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
