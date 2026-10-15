@@ -9,6 +9,7 @@ import { usePath } from "./lib/router";
 import { useTheme } from "./lib/theme";
 import { useReveal } from "./lib/hooks";
 import { getWork } from "./data/work";
+import { applyMeta } from "./lib/seo";
 
 const CaseStudy = lazy(() => import("./pages/CaseStudy"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -26,10 +27,7 @@ export default function App() {
 
   useReveal(path);
 
-  useEffect(() => {
-    const study = workSlug && getWork(workSlug);
-    document.title = study ? `${study.name} · Arnav Dixit` : route === "404" ? "Not found · Arnav Dixit" : "Arnav Dixit · SharePoint & SPFx Developer";
-  }, [route, workSlug]);
+  useEffect(() => applyMeta(path), [path]);
 
   useEffect(() => {
     const onKey = (e) => {

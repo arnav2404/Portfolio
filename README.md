@@ -14,7 +14,7 @@ Node 20.19+ (or 22) is required.
 ## Deploy to Vercel (Hobby)
 1. Push this folder to a GitHub repo (or replace the contents of your existing portfolio repo).
 2. In Vercel: **Add New → Project → Import** the repo. Framework is detected as **Vite**; build `npm run build`, output `dist` (already set in `vercel.json`).
-3. Keep your custom domain on the project. If the domain is not `arnav-my-porfolio.uk`, search-and-replace it in `index.html`, `public/robots.txt` and `public/sitemap.xml`.
+3. Keep your custom domain (`arnavdixit.com`) on the project. If it ever changes, update `SITE` in `src/lib/seo.js` and the sitemap line in `public/robots.txt`; the sitemap and every page's links are generated from `SITE`.
 4. Optional: enable **Web Analytics** in the Vercel project (free tier) — `@vercel/analytics` is already wired in.
 
 `vercel.json` adds an SPA rewrite so `/work/innov8` style links work on refresh, long-term caching for hashed assets, and basic security headers.
