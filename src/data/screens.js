@@ -3,7 +3,7 @@ const full = import.meta.glob("../assets/screens/*/*.webp", { eager: true, impor
 const thumbs = import.meta.glob("../assets/thumbs/*/*.webp", { eager: true, import: "default" });
 
 const meta = {
-  innov8: { title: "Innov8 Portal & Idea Management", project: "Innov8", note: "Portal home, sprint pipeline across every lifecycle stage, sprint board, governance operations console and the in-app notifications centre." },
+  innov8: { title: "Innov8 Portal & Idea Management", project: "Innov8", note: "Portal home, sprint pipeline across every lifecycle stage, sprint board, governance operations console, the in-app notifications centre, and the Portal CMS: a page tree with publish states and a design-locked page editor with live preview." },
   athar: { title: "Athar Awards Admin", project: "Athar Awards", note: "Admin dashboard, submissions queue with scoring, versioned forms, the form builder with interactive live preview, and Power Automate mail templates." },
   home: { title: "Homepage & Global Banner", project: "Tawasol", note: "Branded landing experience with hero, banner communication and structured entry points." },
   featurewheel: { title: "Feature Wheel", project: "Tawasol", note: "A visual navigation wheel that surfaces the portal's key destinations and quick actions." },

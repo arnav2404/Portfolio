@@ -1,44 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ArrowDownRight, ArrowUpRight, MapPin } from "lucide-react";
-import { UIContext } from "../App";
+import React from "react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import SignalField from "../components/SignalField";
 import LiveConsole from "../demos/LiveConsole";
 import { Link } from "../lib/router";
-import { heroVerbs, profile, stats } from "../data/profile";
-import { usePrefersReducedMotion, yearsSince } from "../lib/hooks";
-import { modKey } from "../components/Nav";
-
-function Typer({ words }) {
-  const reduced = usePrefersReducedMotion();
-  const [i, setI] = useState(0);
-  const [n, setN] = useState(reduced ? words[0].length : 0);
-  const [del, setDel] = useState(false);
-
-  useEffect(() => {
-    if (reduced) return undefined;
-    const word = words[i];
-    let t;
-    if (!del && n < word.length) t = setTimeout(() => setN(n + 1), 55);
-    else if (!del) t = setTimeout(() => setDel(true), 1900);
-    else if (n > 0) t = setTimeout(() => setN(n - 1), 25);
-    else {
-      setDel(false);
-      setI((i + 1) % words.length);
-    }
-    return () => clearTimeout(t);
-  }, [n, del, i, words, reduced]);
-
-  return (
-    <span className="text-ink">
-      {words[i].slice(0, n)}
-      <span className="caret ml-0.5 inline-block h-[0.9em] w-[2px] translate-y-[0.12em] bg-accent-text" />
-    </span>
-  );
-}
+import { coreStack, profile, stats } from "../data/profile";
+import { yearsSince } from "../lib/hooks";
 
 export default function Hero() {
-  const { openPalette } = useContext(UIContext);
   const years = Math.floor(yearsSince(profile.careerStart) * 10) / 10;
+  // The 20-second version for recruiters: everything they scan for, in one card.
+  const facts = [
+    ["Role", profile.role],
+    ["Experience", `${Math.floor(years)}+ years on SharePoint Online`],
+    ["Core stack", coreStack.join(" · ")],
+    ["Based in", `${profile.location}, India`],
+  ];
   const heroStats = stats.map((s) => (s.computed === "years" ? { ...s, value: `${years >= 3 ? Math.floor(years) : years}+` } : s));
 
   return (
@@ -67,17 +43,12 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="rise mt-8 text-lg text-ink-2 sm:text-xl" style={{ "--d": "160ms" }}>
-            Lately that means <Typer words={heroVerbs} />
+          <p className="rise mt-8 max-w-xl text-lg leading-relaxed text-ink-2" style={{ "--d": "160ms" }}>
+            I'm {profile.first}. My work moved from single web parts to full applications: staged review workflows, a CMS for non-technical admins and a
+            configurable awards platform.
           </p>
 
-          <p className="rise mt-5 max-w-xl leading-relaxed text-ink-3" style={{ "--d": "220ms" }}>
-            I'm {profile.name}, a {profile.role} with {Math.floor(years)}+ years on SharePoint Online. My work moved from single web parts to full
-            applications: staged review workflows, a CMS for non-technical admins, and a configurable awards platform, built with SPFx, React, TypeScript, Graph and
-            Power Automate.
-          </p>
-
-          <div className="rise mt-9 flex flex-wrap items-center gap-3" style={{ "--d": "280ms" }}>
+          <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--d": "220ms" }}>
             <Link
               to="/#work"
               className="group inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 font-semibold text-accent-ink shadow-[0_10px_40px_-10px_var(--accent)] transition hover:-translate-y-0.5"
@@ -92,14 +63,21 @@ export default function Hero() {
             >
               Resume <ArrowUpRight className="h-4 w-4" />
             </a>
-            <button type="button" onClick={openPalette} className="hidden items-center gap-2 px-2 text-sm text-ink-3 hover:text-ink md:inline-flex">
-              or press <span className="kbd">{modKey}</span>
-            </button>
           </div>
 
-          <p className="rise mt-8 inline-flex items-center gap-2 text-sm text-ink-3" style={{ "--d": "340ms" }}>
-            <MapPin className="h-4 w-4" /> {profile.location}, India · {profile.available}
-          </p>
+          <div className="rise mt-8 max-w-xl rounded-2xl border border-line bg-surface/60 p-5 backdrop-blur" style={{ "--d": "280ms" }}>
+            <p className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent-text">
+              <span className="live-dot h-1.5 w-1.5 rounded-full bg-accent" /> {profile.available}
+            </p>
+            <dl className="mt-4 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
+              {facts.map(([k, v]) => (
+                <div key={k} className="min-w-0">
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3">{k}</dt>
+                  <dd className="mt-0.5 text-ink">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
 
         <div className="rise min-w-0" style={{ "--d": "250ms" }}>

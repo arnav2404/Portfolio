@@ -1,6 +1,5 @@
 import React from "react";
 import Hero from "../sections/Hero";
-import Marquee from "../sections/Marquee";
 import Capabilities from "../sections/Capabilities";
 import Work from "../sections/Work";
 import Showreel from "../sections/Showreel";
@@ -14,10 +13,9 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Marquee />
+      <Work />
       <Capabilities />
       <Showreel />
-      <Work />
       <Principles />
       <Screens />
       <Stack />

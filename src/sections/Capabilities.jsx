@@ -9,7 +9,7 @@ const icons = { Boxes, LayoutTemplate, ScanSearch, Workflow };
 export default function Capabilities() {
   return (
     <Section id="build">
-      <SectionHead index="01" eyebrow="What I build" title={<>More than web parts. <span className="text-ink-3">Whole systems on Microsoft 365.</span></>}>
+      <SectionHead index="02" eyebrow="What I build" title={<>More than web parts. <span className="text-ink-3">Whole systems on Microsoft 365.</span></>}>
         Four kinds of work I'm trusted with, each backed by something running in production or in active delivery.
       </SectionHead>
       <div className="grid gap-4 md:grid-cols-2">

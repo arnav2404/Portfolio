@@ -12,12 +12,6 @@ const STEPS = [
     stack: [],
   },
   {
-    tag: "The toolbox",
-    title: "One toolkit, every moving part.",
-    body: "Everything I reach for, from the first web part to the last governance script, working as one system.",
-    stack: [],
-  },
-  {
     tag: "Layer 01 · Interface",
     title: "The lens people actually look through.",
     body: "SPFx web parts and application customizers in React and TypeScript. Responsive, themed light and dark, accessible, and fast on real SharePoint pages.",
@@ -64,10 +58,13 @@ const LAYERS = [
 ];
 const LAYER_INK = ["#1d2026", "#4f7300", "#0b8295", "#6b4fd8", "#cf4b2a", "#a86f00"];
 
+// Scroll length of each step, in viewport heights. Short enough that the tour reads as a bonus, not a wall.
+const STEP_VH = 75;
+
 const LABELS = {
-  toolboxRight: ["spfx", "react", "typescript", "fluent ui", "pnp js", "power automate"],
-  toolboxLeft: ["microsoft graph", "azure ai", "power bi", "pnp powershell", "kql search"],
   layers: LAYERS.map((l) => l.name.toLowerCase()),
+  // Name plate shown in the hover close-up.
+  suit: { code: "AD-01 · Core unit", name: "Halo Drive", note: "Live lens · close-up" },
 };
 
 // Ink colours used while the section is on "paper".
@@ -96,6 +93,7 @@ export default function Showreel() {
   const [active, setActive] = useState(0);
   const [paper, setPaper] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [closeUp, setCloseUp] = useState(false);
   const reduced = usePrefersReducedMotion();
   const n = STEPS.length;
 
@@ -114,9 +112,10 @@ export default function Showreel() {
           if (disposed) return;
           const m = createMachine(canvasRef.current, overlayRef.current, LABELS);
           sceneRef.current = m;
+          m.onZoom(setCloseUp);
           const size = () => {
-            const r = canvasRef.current.getBoundingClientRect();
-            m.resize(r.width, r.height);
+            const r = canvasRef.current?.getBoundingClientRect();
+            if (r) m.resize(r.width, r.height);
           };
           size();
           resizeObs = new ResizeObserver(size);
@@ -149,6 +148,7 @@ export default function Showreel() {
   // Scroll drives the paper fade, explode amount, labels, pose and the copy.
   useEffect(() => {
     let raf = 0;
+    let lastB = "";
     const update = () => {
       raf = 0;
       const el = sectionRef.current;
@@ -160,32 +160,34 @@ export default function Showreel() {
       const b = smooth(0.55, 1.15, pos) * (1 - smooth(n - 1.45, n - 0.85, pos));
       setActive(idx);
       setPaper(b > 0.5);
-      stageRef.current?.style.setProperty("--b", b.toFixed(3));
+      // Only touch the stage style when the paper fade actually moves; it repaints the whole stage.
+      const bs = b.toFixed(3);
+      if (bs !== lastB) {
+        lastB = bs;
+        stageRef.current?.style.setProperty("--b", bs);
+      }
       if (markerRef.current) markerRef.current.style.left = `calc(12px + ${p.toFixed(4)} * (100% - 24px))`;
       sceneRef.current?.set({
         b,
-        explode: smooth(1.55, 2.4, pos) * (1 - smooth(n - 1.6, n - 0.8, pos)),
-        toolbox: smooth(1.05, 1.35, pos) * (1 - smooth(1.7, 1.95, pos)),
-        tags: smooth(2.15, 2.45, pos) * (1 - smooth(n - 1.3, n - 1.05, pos)),
-        focus: idx >= 2 && idx <= n - 2 ? idx - 1 : 0,
+        explode: smooth(0.55, 1.3, pos) * (1 - smooth(n - 1.6, n - 0.8, pos)),
+        tags: smooth(0.95, 1.25, pos) * (1 - smooth(n - 1.3, n - 1.05, pos)),
+        focus: idx >= 1 && idx <= n - 2 ? idx : 0,
         pose: Math.max(0, pos - 0.5),
         progress: p,
         steps: n,
+        hoverable: (idx === 0 || idx === n - 1) && b < 0.05,
       });
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
     };
-    const onMove = (e) => sceneRef.current?.pointer((e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1);
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
-    window.addEventListener("pointermove", onMove, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
-      window.removeEventListener("pointermove", onMove);
     };
   }, [n]);
 
@@ -197,10 +199,11 @@ export default function Showreel() {
   };
 
   const s = STEPS[active];
-  const focus = active >= 2 && active <= n - 2 ? active - 1 : 0;
+  const focus = active >= 1 && active <= n - 2 ? active : 0;
+  const fullForm = (active === 0 || active === n - 1) && !paper && !failed;
 
   return (
-    <section id="tour" ref={sectionRef} aria-label="How I build, as a machine taken apart" className="relative" style={{ height: `${n * 100 + 40}vh` }}>
+    <section id="tour" ref={sectionRef} aria-label="How I build, as a machine taken apart" className="relative" style={{ height: `${n * STEP_VH + 40}vh` }}>
       <div
         ref={stageRef}
         className="sticky top-0 h-[100svh] overflow-hidden text-ink"
@@ -268,6 +271,14 @@ export default function Showreel() {
           </div>
         </div>
 
+        <p
+          aria-hidden
+          className="pointer-events-none absolute bottom-3 left-1/2 hidden -translate-x-1/2 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3 transition-opacity duration-700 md:flex"
+          style={{ opacity: failed || closeUp ? 0 : 1 }}
+        >
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+          {fullForm ? "Hover to get close · " : ""}Drag to turn · Pinch or Ctrl + scroll to zoom
+        </p>
         {/* Layer breakdown + scroll timeline, bottom right on larger screens */}
         <div className="pointer-events-none absolute bottom-6 right-6 hidden w-72 space-y-2 md:block">
           <div

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "../lib/router";
 import { accentVar, getWork, work } from "../data/work";
 import { getScreenGroups } from "../data/screens";
@@ -10,6 +10,7 @@ import CmsDemo from "../demos/CmsDemo";
 import KqlDemo from "../demos/KqlDemo";
 import { useInView, usePrefersReducedMotion } from "../lib/hooks";
 import { profile } from "../data/profile";
+import HireCta from "../components/HireCta";
 
 const demosFor = {
   innov8: [
@@ -201,10 +202,8 @@ export default function CaseStudy({ slug }) {
           </span>
         </div>
       </Link>
-      <div className="mx-auto max-w-6xl px-4 pb-10 sm:px-6">
-        <a href={`mailto:${profile.email}?subject=${encodeURIComponent(`About ${w.name}`)}`} className="inline-flex items-center gap-1.5 text-sm text-ink-3 hover:text-ink">
-          Questions about {w.name}? Email me <ArrowUpRight className="h-3.5 w-3.5" />
-        </a>
+      <div className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
+        <HireCta subject={`About ${w.name}`} />
       </div>
     </article>
   );

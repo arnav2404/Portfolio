@@ -16,14 +16,8 @@ export const profile = {
   languages: "Hindi (native), English (professional)",
 };
 
-// Statements shown in the hero, rotated one at a time.
-export const heroVerbs = [
-  "idea management platforms",
-  "no-code CMS dashboards",
-  "awards & recognition systems",
-  "enterprise intranets",
-  "document search that works",
-];
+// The few tools a recruiter scans for, shown in the hero summary card. The full list lives in skillGroups.
+export const coreStack = ["SPFx", "React", "TypeScript", "Power Automate", "Microsoft Graph"];
 
 export const capabilities = [
   {

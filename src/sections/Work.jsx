@@ -5,6 +5,7 @@ import { Link } from "../lib/router";
 import { accentVar, work } from "../data/work";
 import { screenGroups } from "../data/screens";
 import { spotlight } from "../lib/hooks";
+import HireCta from "../components/HireCta";
 
 const cover = (key, n = 0) => screenGroups.find((g) => g.key === key)?.images[n];
 
@@ -76,7 +77,7 @@ export default function Work() {
 
   return (
     <Section id="work">
-      <SectionHead index="02" eyebrow="Selected work" title={<>Things I've built, <span className="text-ink-3">and why they're built that way.</span></>}>
+      <SectionHead index="01" eyebrow="Selected work" title={<>Things I've built, <span className="text-ink-3">and why they're built that way.</span></>}>
         Each case study covers the problem, what I built, the architecture and the decisions behind it. Client code and data stay private; the thinking doesn't.
       </SectionHead>
 
@@ -131,6 +132,8 @@ export default function Work() {
           ))}
         </ul>
       </div>
+
+      <HireCta className="mt-14" />
     </Section>
   );
 }
