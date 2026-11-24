@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, Briefcase, Copy, CornerDownLeft, FileText, Hash, Linkedin, Mail, Moon, Search } from "lucide-react";
 import { UIContext } from "../App";
 import { navigate } from "../lib/router";
-import { navLinks } from "./Nav";
+import { useNavLinks } from "./Nav";
 import { work } from "../data/work";
 import { profile } from "../data/profile";
 
@@ -14,6 +14,7 @@ export default function CommandPalette({ open, onClose }) {
   const inputRef = useRef(null);
   const listRef = useRef(null);
 
+  const navLinks = useNavLinks();
   const items = useMemo(
     () => [
       ...work.map((w) => ({
@@ -44,7 +45,7 @@ export default function CommandPalette({ open, onClose }) {
       { group: "Actions", label: "Open LinkedIn", hint: "New tab", icon: Linkedin, run: () => window.open(profile.linkedin, "_blank", "noopener") },
       { group: "Actions", label: `Switch to ${theme === "dark" ? "light" : "dark"} theme`, hint: "Theme", icon: Moon, keep: true, run: toggleTheme },
     ],
-    [theme, toggleTheme]
+    [theme, toggleTheme, navLinks]
   );
 
   const filtered = useMemo(() => {

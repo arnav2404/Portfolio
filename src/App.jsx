@@ -10,20 +10,32 @@ import { useTheme } from "./lib/theme";
 import { useReveal } from "./lib/hooks";
 import { getWork } from "./data/work";
 import { applyMeta } from "./lib/seo";
+import { DEFAULT_SETTINGS, SettingsContext } from "./lib/settings";
 
 const CaseStudy = lazy(() => import("./pages/CaseStudy"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Admin = lazy(() => import("./pages/Admin"));
 
 export const UIContext = React.createContext(null);
 
-export default function App() {
+export default function App({ initialSettings = DEFAULT_SETTINGS, settingsRefresh }) {
   const path = usePath();
+  const [settings, setSettings] = useState(initialSettings);
+  const settingsValue = useMemo(() => ({ settings, setSettings }), [settings]);
   const { theme, toggle } = useTheme();
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [lightbox, setLightbox] = useState(null); // { group, index }
 
   const workSlug = path.match(/^\/work\/([\w-]+)\/?$/)?.[1];
-  const route = path === "/" || path === "" ? "home" : workSlug && getWork(workSlug) ? "work" : "404";
+  const isAdmin = /^\/admin\/?$/.test(path);
+  const route = path === "/" || path === "" ? "home" : workSlug && getWork(workSlug) ? "work" : isAdmin ? "admin" : "404";
+
+  // A returning visitor started from the last saved copy; swap in the latest once it arrives.
+  useEffect(() => {
+    let live = true;
+    settingsRefresh?.then((fresh) => live && fresh && setSettings(fresh));
+    return () => { live = false; };
+  }, [settingsRefresh]);
 
   useReveal(path);
 
@@ -46,7 +58,20 @@ export default function App() {
     [theme, toggle, openLightbox]
   );
 
+  if (route === "admin") {
+    return (
+      <SettingsContext.Provider value={settingsValue}>
+        <UIContext.Provider value={ui}>
+          <Suspense fallback={<div className="min-h-screen" />}>
+            <Admin />
+          </Suspense>
+        </UIContext.Provider>
+      </SettingsContext.Provider>
+    );
+  }
+
   return (
+    <SettingsContext.Provider value={settingsValue}>
     <UIContext.Provider value={ui}>
       <a
         href="#main"
@@ -67,5 +92,6 @@ export default function App() {
       <Lightbox state={lightbox} onChange={setLightbox} />
       <Analytics />
     </UIContext.Provider>
+    </SettingsContext.Provider>
   );
 }

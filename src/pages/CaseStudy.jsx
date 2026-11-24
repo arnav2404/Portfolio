@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Link } from "../lib/router";
 import { accentVar, getWork, work } from "../data/work";
 import { getScreenGroups } from "../data/screens";
+import { useShowScreenshots } from "../lib/settings";
 import { ScreenGrid } from "../sections/Screens";
 import { Tag } from "../components/ui";
 import LifecycleDemo from "../demos/LifecycleDemo";
@@ -72,7 +73,8 @@ export default function CaseStudy({ slug }) {
   const color = accentVar[w.accent];
   const idx = work.findIndex((x) => x.slug === slug);
   const next = work[(idx + 1) % work.length];
-  const screens = getScreenGroups(w.screens);
+  const showScreenshots = useShowScreenshots();
+  const screens = showScreenshots ? getScreenGroups(w.screens) : [];
   const demos = demosFor[slug] || [];
 
   return (

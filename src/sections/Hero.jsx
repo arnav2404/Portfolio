@@ -3,17 +3,20 @@ import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import SignalField from "../components/SignalField";
 import LiveConsole from "../demos/LiveConsole";
 import { Link } from "../lib/router";
-import { coreStack, profile, stats } from "../data/profile";
+import { profile, stats } from "../data/profile";
 import { yearsSince } from "../lib/hooks";
+import { useSettings } from "../lib/settings";
 
 export default function Hero() {
+  // Hero text comes from the admin center (/admin); blank fields there use the built-in text.
+  const { hero } = useSettings().settings;
   const completedYears = Math.floor(yearsSince(profile.careerStart));
   // The 20-second version for recruiters: everything they scan for, in one card.
   const facts = [
-    ["Role", profile.role],
+    ["Role", hero.role],
     ["Experience", `${completedYears}+ years (including internship)`],
-    ["Core stack", coreStack.join(" · ")],
-    ["Based in", `${profile.location}, India`],
+    ["Core stack", hero.coreStack.join(" · ")],
+    ["Based in", hero.location],
   ];
   const heroStats = stats.map((s) => (s.computed === "years" ? { ...s, value: `${completedYears}+` } : s));
 
@@ -26,17 +29,17 @@ export default function Hero() {
         <div className="min-w-0">
           <div className="rise mb-7 inline-flex max-w-full items-center gap-2.5 rounded-full border border-line bg-surface/60 py-1.5 pl-2 pr-3.5 text-xs text-ink-2 backdrop-blur" style={{ "--d": "0ms" }}>
             <span className="relative flex h-5 items-center gap-1.5 rounded-full bg-accent-soft px-2 font-mono text-[10px] uppercase tracking-wider text-accent-text">
-              <span className="live-dot h-1.5 w-1.5 rounded-full bg-accent" /> Now
+              <span className="live-dot h-1.5 w-1.5 rounded-full bg-accent" /> {hero.badgeLabel}
             </span>
-            <span className="truncate">Building Innov8 Idea Management at {profile.company}</span>
+            <span className="truncate">{hero.badgeText}</span>
           </div>
 
           <h1 className="rise font-display text-[clamp(2.6rem,5.4vw,4.6rem)] font-extrabold leading-[0.95] tracking-[-0.045em]" style={{ "--d": "80ms" }}>
-            I build products
+            {hero.headlineLine1}
             <br />
-            that live inside{" "}
+            {hero.headlineLine2}{" "}
             <span className="relative inline-block">
-              <span className="text-gradient">SharePoint.</span>
+              <span className="text-gradient">{hero.headlineHighlight}</span>
               <svg aria-hidden viewBox="0 0 300 20" className="absolute -bottom-2 left-0 w-full text-accent-text" preserveAspectRatio="none">
                 <path d="M2 14 C 60 4, 120 4, 170 10 S 260 18, 298 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="draw-path" />
               </svg>
@@ -44,8 +47,7 @@ export default function Hero() {
           </h1>
 
           <p className="rise mt-8 max-w-xl text-lg leading-relaxed text-ink-2" style={{ "--d": "160ms" }}>
-            I'm {profile.first}. My work moved from single web parts to full applications: staged review workflows, a CMS for non-technical admins and a
-            configurable awards platform.
+            {hero.intro}
           </p>
 
           <div className="rise mt-8 flex flex-wrap items-center gap-3" style={{ "--d": "220ms" }}>
@@ -53,7 +55,7 @@ export default function Hero() {
               to="/#work"
               className="group inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 font-semibold text-accent-ink shadow-[0_10px_40px_-10px_var(--accent)] transition hover:-translate-y-0.5"
             >
-              Explore the work <ArrowDownRight className="h-4 w-4 transition group-hover:rotate-[-45deg]" />
+              {hero.primaryCta} <ArrowDownRight className="h-4 w-4 transition group-hover:rotate-[-45deg]" />
             </Link>
             <a
               href={profile.resume}
@@ -61,13 +63,13 @@ export default function Hero() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-xl border border-line-strong bg-surface/60 px-5 py-3 font-semibold backdrop-blur transition hover:bg-surface-2"
             >
-              Resume <ArrowUpRight className="h-4 w-4" />
+              {hero.resumeLabel} <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
 
           <div className="rise mt-8 max-w-xl rounded-2xl border border-line bg-surface/60 p-5 backdrop-blur" style={{ "--d": "280ms" }}>
             <p className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent-text">
-              <span className="live-dot h-1.5 w-1.5 rounded-full bg-accent" /> {profile.available}
+              <span className="live-dot h-1.5 w-1.5 rounded-full bg-accent" /> {hero.available}
             </p>
             <dl className="mt-4 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
               {facts.map(([k, v]) => (

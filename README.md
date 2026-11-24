@@ -28,4 +28,18 @@ Node 20.19+ (or 22) is required.
 | Resume PDF | `public/Arnav_Dixit_Resume.pdf` |
 | Colours / fonts | `src/index.css` (tokens at the top) |
 
+Whether screenshots show on the site is a switch in the admin center (see below). They are off by default.
+
 To add screenshots: export as WebP (1600px wide for full, 560px for thumbs), drop them in a folder under both `screens/` and `thumbs/` with the same file names, then add a matching entry in `meta` inside `src/data/screens.js`.
+
+## Admin center (`/admin`)
+
+A password-protected page for site settings: the **Show screenshots** switch and the **hero text** on the home page. Saving makes the change live for every visitor within a few seconds; blank hero fields fall back to the built-in text in `src/lib/settings.jsx`.
+
+One-time setup in Vercel:
+
+1. **Storage → Upstash Redis** (free plan): create a database and connect it to this project. This adds `KV_REST_API_URL` and `KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN`).
+2. **Settings → Environment Variables**: add `ADMIN_PASSWORD` (a long password). Optionally add `SESSION_SECRET` (any long random string) to sign sessions; without it one is derived from the password.
+3. Redeploy.
+
+How it works: the serverless functions in `api/` check the password, set an 8-hour HttpOnly session cookie, and read/write one settings record in Redis. Five wrong passwords lock that IP address out for 15 minutes. `npm run dev` doesn't run `api/`; use `vercel dev` to try the admin center locally.

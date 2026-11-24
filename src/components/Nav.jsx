@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { Command, Menu, Moon, Sun, X, ArrowUpRight } from "lucide-react";
 import { UIContext } from "../App";
 import { Link, usePath } from "../lib/router";
 import { profile } from "../data/profile";
-import { SHOW_SCREENSHOTS } from "../data/screens";
+import { useShowScreenshots } from "../lib/settings";
 
 export const modKey =
   typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? "⌘K" : "Ctrl K";
@@ -15,7 +15,13 @@ export const navLinks = [
   { id: "stack", label: "Stack" },
   { id: "journey", label: "Journey" },
   { id: "contact", label: "Contact" },
-].filter((link) => SHOW_SCREENSHOTS || link.id !== "screens");
+];
+
+/** Menu links, without "Screens" while screenshots are switched off in the admin center. */
+export function useNavLinks() {
+  const showScreenshots = useShowScreenshots();
+  return useMemo(() => (showScreenshots ? navLinks : navLinks.filter((link) => link.id !== "screens")), [showScreenshots]);
+}
 
 export function Logo({ className = "" }) {
   return (
@@ -36,6 +42,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
   const isHome = path === "/";
+  const links = useNavLinks();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -50,12 +57,12 @@ export default function Nav() {
       (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
       { rootMargin: "-45% 0px -50% 0px" }
     );
-    navLinks.forEach((l) => {
+    links.forEach((l) => {
       const el = document.getElementById(l.id);
       if (el) io.observe(el);
     });
     return () => io.disconnect();
-  }, [isHome]);
+  }, [isHome, links]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -76,7 +83,7 @@ export default function Nav() {
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
-          {navLinks.map((l) => (
+          {links.map((l) => (
             <li key={l.id}>
               <Link
                 to={`/#${l.id}`}
@@ -133,7 +140,7 @@ export default function Nav() {
       {open && (
         <div className="fade-in mx-auto mt-2 max-w-6xl rounded-2xl border border-line bg-bg/95 p-3 shadow-[var(--shadow)] backdrop-blur-xl lg:hidden">
           <ul className="grid gap-1">
-            {navLinks.map((l, i) => (
+            {links.map((l, i) => (
               <li key={l.id} className="rise" style={{ "--d": `${i * 35}ms` }}>
                 <Link
                   to={`/#${l.id}`}

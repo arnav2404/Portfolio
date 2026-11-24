@@ -106,6 +106,7 @@ export function pageMeta(path) {
     };
   }
 
+  if (/^\/admin\/?$/.test(path)) return { title: `Admin center · ${profile.name}`, description: "", url: `${SITE}/admin`, noindex: true };
   return { title: `Not found · ${profile.name}`, description: "", url: `${SITE}${path}`, noindex: true };
 }
 

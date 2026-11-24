@@ -4,12 +4,14 @@ import { Section, SectionHead } from "../components/ui";
 import { Link } from "../lib/router";
 import { accentVar, work } from "../data/work";
 import { screenGroups } from "../data/screens";
+import { useShowScreenshots } from "../lib/settings";
 import { spotlight } from "../lib/hooks";
 import HireCta from "../components/HireCta";
 
-const cover = (key, n = 0) => screenGroups.find((g) => g.key === key)?.images[n];
-
 function Visual({ type }) {
+  // Screenshot covers only while screenshots are switched on in the admin center; drawings otherwise.
+  const showScreenshots = useShowScreenshots();
+  const cover = (key, n = 0) => (showScreenshots ? screenGroups.find((g) => g.key === key)?.images[n] : undefined);
   if (type === "lifecycle" && !cover("innov8")) {
     const stages = ["Draft", "Screen", "Eval", "Sprint", "Build", "Done"];
     const heights = [92, 74, 58, 40, 28, 18];
