@@ -12,17 +12,17 @@ export default function Journey() {
 
       <ol className="relative ml-2 border-l border-line">
         {experience.map((e, i) => (
-          <li key={e.company} className="reveal relative pb-14 pl-8 sm:pl-12" style={{ "--d": `${i * 80}ms` }}>
+          <li key={`${e.company || e.role}-${e.period}`} className="reveal relative pb-14 pl-8 sm:pl-12" style={{ "--d": `${i * 80}ms` }}>
             <span className={`absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-bg ${e.current ? "live-dot bg-accent" : "bg-ink-3"}`} />
             <div className="grid gap-4 md:grid-cols-[220px_1fr] md:gap-10">
               <div>
                 <p className="font-mono text-xs text-ink-3">{e.period}</p>
-                <p className="mt-2 text-sm text-ink-3">{e.place}</p>
+                {e.place && <p className="mt-2 text-sm text-ink-3">{e.place}</p>}
                 {e.current && <span className="mt-3 inline-block rounded-full bg-accent-soft px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-accent-text">Current</span>}
               </div>
               <div>
                 <h3 className="font-display text-2xl font-bold tracking-tight">{e.role}</h3>
-                <p className="mt-1 text-ink-2">{e.company}</p>
+                {e.company && <p className="mt-1 text-ink-2">{e.company}</p>}
                 <ul className="mt-5 space-y-3">
                   {e.points.map((p) => (
                     <li key={p} className="flex gap-3 leading-relaxed text-ink-2">

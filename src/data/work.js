@@ -216,7 +216,7 @@ export const work = [
     tagline: "Making search on a large, legacy document system fast, accurate and trustworthy.",
     period: "2026",
     role: "SharePoint & SPFx Developer",
-    status: "2-month delivery",
+    status: "Delivered · support until Dec 2026",
     accent: "cyan",
     featured: true,
     visual: "kql",
@@ -322,7 +322,7 @@ export const work = [
       "An internal travel management solution for requests, approvals, itinerary tracking, coordinator actions and post-trip settlement. Canvas Apps handle capture and role-specific views; SharePoint lists and Power Automate handle data, routing, reminders and escalations.",
     problem: "Travel ran on email and spreadsheets with no visibility for coordinators or approvers.",
     stack: ["SharePoint Online", "Canvas Apps", "Power Automate", "Microsoft Graph", "ShareGate"],
-    facts: [{ k: "Duration", v: "12 months" }],
+    facts: [{ k: "Duration", v: "14 months" }],
     groups: [
       {
         title: "Key work",

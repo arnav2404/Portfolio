@@ -43,6 +43,8 @@ export function pageMeta(path) {
       description: clip(`${study.kicker} by ${profile.name}. ${study.tagline} Built with ${study.stack.slice(0, 3).join(", ")}.`),
       url,
       type: "article",
+      // Rendered per case study into public/og/ (name, kicker and tagline on the site's dark card).
+      image: `${SITE}/og/${study.slug}.png`,
       jsonLd: {
         "@context": "https://schema.org",
         "@graph": [
@@ -52,6 +54,7 @@ export function pageMeta(path) {
             headline: study.tagline,
             abstract: clip(study.summary, 300),
             url,
+            image: `${SITE}/og/${study.slug}.png`,
             author: { "@id": person["@id"] },
             keywords: study.stack.join(", "),
           },
@@ -119,7 +122,7 @@ export function headTags(m) {
     `<meta property="og:title" content="${esc(m.title)}" />`,
     `<meta property="og:description" content="${esc(m.description)}" />`,
     `<meta property="og:url" content="${m.url}" />`,
-    `<meta property="og:image" content="${OG_IMAGE}" />`,
+    `<meta property="og:image" content="${m.image || OG_IMAGE}" />`,
     `<meta property="og:image:width" content="1200" />`,
     `<meta property="og:image:height" content="630" />`,
     `<meta property="og:image:alt" content="${esc(`${profile.name}, ${profile.role}`)}" />`,
@@ -127,7 +130,7 @@ export function headTags(m) {
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${esc(m.title)}" />`,
     `<meta name="twitter:description" content="${esc(m.description)}" />`,
-    `<meta name="twitter:image" content="${OG_IMAGE}" />`,
+    `<meta name="twitter:image" content="${m.image || OG_IMAGE}" />`,
     `<script type="application/ld+json">${JSON.stringify(m.jsonLd).replace(/</g, "\\u003c")}</script>`,
   ].join("\n    ");
 }
@@ -159,5 +162,6 @@ export function applyMeta(path) {
   set('meta[property="og:title"]', "content", m.title);
   set('meta[property="og:description"]', "content", m.description || null);
   set('meta[property="og:url"]', "content", m.url);
+  set('meta[property="og:image"]', "content", m.image || OG_IMAGE);
   set('meta[name="robots"]', "content", m.noindex ? "noindex" : null);
 }

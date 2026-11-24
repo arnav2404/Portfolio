@@ -7,15 +7,15 @@ import { coreStack, profile, stats } from "../data/profile";
 import { yearsSince } from "../lib/hooks";
 
 export default function Hero() {
-  const years = Math.floor(yearsSince(profile.careerStart) * 10) / 10;
+  const completedYears = Math.floor(yearsSince(profile.careerStart));
   // The 20-second version for recruiters: everything they scan for, in one card.
   const facts = [
     ["Role", profile.role],
-    ["Experience", `${Math.floor(years)}+ years on SharePoint Online`],
+    ["Experience", `${completedYears}+ years (including internship)`],
     ["Core stack", coreStack.join(" · ")],
     ["Based in", `${profile.location}, India`],
   ];
-  const heroStats = stats.map((s) => (s.computed === "years" ? { ...s, value: `${years >= 3 ? Math.floor(years) : years}+` } : s));
+  const heroStats = stats.map((s) => (s.computed === "years" ? { ...s, value: `${completedYears}+` } : s));
 
   return (
     <section id="top" className="noise relative overflow-hidden pb-16 pt-28 sm:pt-32 md:pb-24">

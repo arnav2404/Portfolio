@@ -11,7 +11,10 @@ export const profile = {
   phone: "+91 9340891701",
   linkedin: "https://www.linkedin.com/in/arnav-dixit-5a5870148/",
   resume: "/Arnav_Dixit_Resume.pdf",
-  careerStart: "2023-05-01",
+  // Overall experience includes a six-month Teceon React internship (Nov 2022–Apr 2023).
+  // Full-time professional experience starts in May 2023.
+  careerStart: "2022-11-01",
+  fullTimeStart: "2023-05-06",
   available: "Open to SharePoint, SPFx and Microsoft 365 product roles",
   languages: "Hindi (native), English (professional)",
 };
@@ -109,7 +112,7 @@ export const principles = [
 ];
 
 export const stats = [
-  { value: "3+", label: "years building on SharePoint Online", computed: "years" },
+  { value: "4+", label: "years of experience (including internship)", computed: "years" },
   { value: "40+", label: "SPFx web parts in the solutions I ship to" },
   { value: "4", label: "enterprise portals shipped or in flight" },
   { value: "9", label: "lifecycle states modelled in Innov8" },
@@ -204,6 +207,16 @@ export const experience = [
       "Built custom web parts and extensions from client requirements, business rules and user feedback.",
       "Created Power Automate flows for approvals, scheduled jobs and reminders, and Canvas Apps for request forms.",
       "Set up sites, lists, libraries and permissions, and handled requirements, post-deployment support and knowledge transfer.",
+    ],
+  },
+  {
+    company: "Teceon",
+    role: "React Developer Intern",
+    place: "New Delhi",
+    period: "Nov 2022 – Apr 2023",
+    points: [
+      "Built React front-ends and reusable components during a six-month internship at Teceon.",
+      "Moved into SharePoint and SPFx development, which is built on React, in a full-time role from May 2023.",
     ],
   },
 ];

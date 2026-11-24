@@ -64,7 +64,10 @@ export function usePrefersReducedMotion() {
 }
 
 export function yearsSince(dateStr, now = new Date()) {
-  const start = new Date(dateStr);
-  const months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+  // Parse calendar dates locally so the experience counter cannot gain or lose
+  // a month in time zones where YYYY-MM-DD would be interpreted as UTC.
+  const [startYear, startMonth, startDay = 1] = dateStr.split("-").map(Number);
+  const months = (now.getFullYear() - startYear) * 12 + now.getMonth() - (startMonth - 1)
+    - (now.getDate() < startDay ? 1 : 0);
   return Math.max(0, months / 12);
 }
