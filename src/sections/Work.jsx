@@ -52,6 +52,57 @@ function Visual({ type }) {
       </div>
     );
   }
+  if (type === "wheel" && !cover("featurewheel")) {
+    const spokes = ["News", "Events", "Forms", "Policies", "Dashboards", "People"];
+    return (
+      <div className="flex h-full items-center justify-center gap-6 px-1">
+        <div className="relative aspect-square h-full max-h-48">
+          <div className="absolute inset-0 rounded-full border border-line-strong transition duration-700 group-hover:rotate-[30deg]">
+            {spokes.map((s, i) => {
+              const a = (i / spokes.length) * 2 * Math.PI - Math.PI / 2;
+              return (
+                <span
+                  key={s}
+                  className="absolute h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent-text/40 bg-accent-text/20"
+                  style={{ left: `${50 + 50 * Math.cos(a)}%`, top: `${50 + 50 * Math.sin(a)}%` }}
+                />
+              );
+            })}
+          </div>
+          <div className="absolute inset-[22%] grid place-items-center rounded-full border border-line bg-surface-2">
+            <span className="font-mono text-[10px] uppercase tracking-wider text-ink-3">Tawasol</span>
+          </div>
+        </div>
+        <div className="hidden space-y-2 sm:block">
+          {spokes.map((s, i) => (
+            <div key={s} className="flex items-center gap-2 transition group-hover:translate-x-1" style={{ transitionDelay: `${i * 40}ms` }}>
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-text/60" />
+              <span className="font-mono text-[10px] text-ink-3">{s}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (type === "kql" && !cover("corpdms")) {
+    return (
+      <div className="flex h-full flex-col gap-2 p-1">
+        <div className="rounded-lg border border-line bg-surface-2 px-3 py-2 font-mono text-[10px] text-ink-3">
+          <span className="text-accent-text">DocType</span>:Contract AND <span className="text-accent-text">Dept</span>:Legal
+        </div>
+        {[88, 72, 64, 50].map((w, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-3 rounded-lg border border-line bg-bg/40 px-3 py-2 transition group-hover:translate-x-1"
+            style={{ transitionDelay: `${i * 50}ms` }}
+          >
+            <span className="h-4 w-3 flex-none rounded-sm border border-line-strong" />
+            <div className="h-1.5 rounded-full bg-line-strong" style={{ width: `${w}%` }} />
+          </div>
+        ))}
+      </div>
+    );
+  }
   const img = {
     lifecycle: cover("innov8", 1),
     builder: cover("athar", 0),

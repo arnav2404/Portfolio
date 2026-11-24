@@ -1,6 +1,7 @@
 import React from "react";
 import { Section, SectionHead } from "../components/ui";
 import { skillGroups } from "../data/profile";
+import { SHOW_SCREENSHOTS } from "../data/screens";
 import sharepoint from "../assets/logos/SharePoint_logo.svg";
 import automate from "../assets/logos/Power_Automate_logo.svg";
 import apps from "../assets/logos/Powerapps_logo.svg";
@@ -18,7 +19,7 @@ const logos = [
 export default function Stack() {
   return (
     <Section id="stack">
-      <SectionHead index="05" eyebrow="Stack" title={<>The toolbox, <span className="text-ink-3">grouped the way I use it.</span></>}>
+      <SectionHead index={SHOW_SCREENSHOTS ? "05" : "04"} eyebrow="Stack" title={<>The toolbox, <span className="text-ink-3">grouped the way I use it.</span></>}>
         Deep on SharePoint and SPFx, comfortable across the wider Microsoft 365 platform, and fluent in the frontend that makes it feel modern.
       </SectionHead>
 

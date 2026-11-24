@@ -2,11 +2,12 @@ import React from "react";
 import { GraduationCap } from "lucide-react";
 import { Section, SectionHead } from "../components/ui";
 import { education, experience } from "../data/profile";
+import { SHOW_SCREENSHOTS } from "../data/screens";
 
 export default function Journey() {
   return (
     <Section id="journey">
-      <SectionHead index="06" eyebrow="Journey" title={<>From list forms <span className="text-ink-3">to full platforms.</span></>}>
+      <SectionHead index={SHOW_SCREENSHOTS ? "06" : "05"} eyebrow="Journey" title={<>From list forms <span className="text-ink-3">to full platforms.</span></>}>
         Started on workflows, Canvas Apps and custom forms. Now building multi-role applications and the platform pieces under them.
       </SectionHead>
 

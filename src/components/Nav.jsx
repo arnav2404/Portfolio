@@ -3,6 +3,7 @@ import { Command, Menu, Moon, Sun, X, ArrowUpRight } from "lucide-react";
 import { UIContext } from "../App";
 import { Link, usePath } from "../lib/router";
 import { profile } from "../data/profile";
+import { SHOW_SCREENSHOTS } from "../data/screens";
 
 export const modKey =
   typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? "⌘K" : "Ctrl K";
@@ -14,7 +15,7 @@ export const navLinks = [
   { id: "stack", label: "Stack" },
   { id: "journey", label: "Journey" },
   { id: "contact", label: "Contact" },
-];
+].filter((link) => SHOW_SCREENSHOTS || link.id !== "screens");
 
 export function Logo({ className = "" }) {
   return (

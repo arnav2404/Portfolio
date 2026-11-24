@@ -1,6 +1,14 @@
 // Screenshots are optimized WebP (full: 1600px, thumbs: 560px) and fingerprinted by Vite.
-const full = import.meta.glob("../assets/screens/*/*.webp", { eager: true, import: "default" });
-const thumbs = import.meta.glob("../assets/thumbs/*/*.webp", { eager: true, import: "default" });
+
+/**
+ * Turns every screenshot on the site on or off: the home page "Screens" section and its menu link,
+ * the project card covers (drawn illustrations show instead) and the case-study "Screens" grids.
+ * Set to true to bring them all back.
+ */
+export const SHOW_SCREENSHOTS = false;
+
+const full = SHOW_SCREENSHOTS ? import.meta.glob("../assets/screens/*/*.webp", { eager: true, import: "default" }) : {};
+const thumbs = SHOW_SCREENSHOTS ? import.meta.glob("../assets/thumbs/*/*.webp", { eager: true, import: "default" }) : {};
 
 const meta = {
   innov8: { title: "Innov8 Portal & Idea Management", project: "Innov8", note: "Portal home, sprint pipeline across every lifecycle stage, sprint board, governance operations console, the in-app notifications centre, and the Portal CMS: a page tree with publish states and a design-locked page editor with live preview." },
